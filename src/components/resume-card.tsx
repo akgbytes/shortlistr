@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Resume } from "../types";
-import ScoreCircle from "./ScoreCircle";
+import ScoreCircle from "./score-circle";
 
 const ResumeCard = ({
   resume: { id, companyName, jobTitle, feedback, imagePath },

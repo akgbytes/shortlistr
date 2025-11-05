@@ -1,6 +1,6 @@
-import Navbar from "./components/Navbar";
-import ResumeCard from "./components/ResumeCard";
-import { resumes } from "./constants";
+import Navbar from "@/components/navbar";
+import ResumeCard from "@/components/resume-card";
+import { resumes } from "@/constants";
 
 export default function Home() {
   return (
