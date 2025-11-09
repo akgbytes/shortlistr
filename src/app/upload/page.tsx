@@ -2,6 +2,9 @@
 
 import FileUploader from "@/components/file-uploader";
 import Navbar from "@/components/navbar";
+import { convertPdfToImage } from "@/lib/pdf2img";
+import { uploadFiles } from "@/lib/uploadthing";
+
 import { FormEvent, useState } from "react";
 
 const Upload = () => {
@@ -12,6 +15,42 @@ const Upload = () => {
   const handleFileSelect = (file: File | null) => {
     setFile(file);
     console.log("file: ", file);
+  };
+
+  const handleAnalyze = async ({
+    companyName,
+    jobTitle,
+    jobDescription,
+    file,
+  }: {
+    companyName: string;
+    jobTitle: string;
+    jobDescription: string;
+    file: File;
+  }) => {
+    setIsProcessing(true);
+
+    setStatusText("Converting to image...");
+    const imageFile = await convertPdfToImage(file);
+    if (!imageFile.file)
+      return setStatusText("Error: Failed to convert PDF to image");
+
+    let imageUrl = "";
+
+    try {
+      setStatusText("Uploading the image...");
+      const res = await uploadFiles("imageUploader", {
+        files: [imageFile.file],
+      });
+
+      imageUrl = res[0].ufsUrl;
+
+      console.log("Uploaded image URL:", imageUrl);
+    } catch (err) {
+      setStatusText("Error: Failed to upload image");
+    }
+
+    setStatusText("Preparing data...");
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

@@ -1,5 +1,13 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, boolean, index } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  timestamp,
+  boolean,
+  index,
+  uuid,
+  jsonb,
+} from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   id: text("id").primaryKey(),
@@ -91,3 +99,25 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export const resumeUploads = pgTable("resume_uploads", {
+  id: uuid("id").defaultRandom().primaryKey(),
+
+  companyName: text("company_name").notNull(),
+  jobTitle: text("job_title").notNull(),
+  jobDescription: text("job_description").notNull(),
+
+  resumeImageUrl: text("resume_image_url").notNull(),
+
+  feedback: jsonb("feedback").default("{}").notNull(),
+
+  userId: text("user_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
+
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
+});
