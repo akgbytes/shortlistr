@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     // Return response
     return NextResponse.json({
       success: true,
-      feedback,
+      id: record.id,
     });
   } catch (error) {
     console.error("AI feedback error:", error);

@@ -4,10 +4,12 @@ import FileUploader from "@/components/file-uploader";
 import Navbar from "@/components/navbar";
 import { convertPdfToImage } from "@/lib/pdf2img";
 import { uploadFiles } from "@/lib/uploadthing";
+import { useRouter } from "next/navigation";
 
 import { FormEvent, useState } from "react";
 
 const Upload = () => {
+  const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -71,10 +73,9 @@ const Upload = () => {
       }
 
       const data = await feedbackRes.json();
-
-      console.log("AI Feedback:", data.feedback);
-
       setStatusText("Analysis completed");
+
+      router.push(`/resume/${data.id}`);
     } catch (err) {
       console.error(err);
       setStatusText("Error: Something went wrong");
