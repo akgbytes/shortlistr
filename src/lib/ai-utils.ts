@@ -25,9 +25,11 @@ export const prepareInstructions = ({
 export const generateFeedback = async ({
   jobTitle,
   jobDescription,
+  imageUrl,
 }: {
   jobTitle: string;
   jobDescription: string;
+  imageUrl: string;
 }) => {
   const instructions = prepareInstructions({
     jobTitle,
@@ -40,9 +42,18 @@ export const generateFeedback = async ({
     messages: [
       {
         role: "user",
-        content: instructions,
+        content: [
+          { type: "text", text: instructions },
+          {
+            type: "image_url",
+            image_url: {
+              url: imageUrl,
+            },
+          },
+        ],
       },
     ],
+
     response_format: {
       type: "json_object",
     },

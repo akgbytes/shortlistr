@@ -41,7 +41,11 @@ export async function POST(req: Request) {
 
     // Generate AI feedback
 
-    const feedback = await generateFeedback({ jobTitle, jobDescription });
+    const feedback = await generateFeedback({
+      jobTitle,
+      jobDescription,
+      imageUrl: record.resumeImageUrl,
+    });
 
     await db
       .update(resumeUploads)
