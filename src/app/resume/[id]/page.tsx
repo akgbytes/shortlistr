@@ -1,6 +1,11 @@
+import ATS from "@/components/ATS";
+import Details from "@/components/details";
+import Summary from "@/components/summary";
 import { db } from "@/db";
 import { resumeUploads } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { requireAuth } from "@/lib/auth-utils";
+import { Feedback } from "@/types";
+import { and, eq } from "drizzle-orm";
 import Link from "next/link";
 
 export default async function Page({
@@ -8,16 +13,25 @@ export default async function Page({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const userSession = await requireAuth();
+
   const { id } = await params;
 
   const [resume] = await db
     .select()
     .from(resumeUploads)
-    .where(eq(resumeUploads.id, id));
+    .where(
+      and(
+        eq(resumeUploads.id, id),
+        eq(resumeUploads.userId, userSession.user.id)
+      )
+    );
 
   if (!resume) {
     throw new Error("bhai baad me aana");
   }
+
+  const feedback = resume.feedback as Feedback;
 
   return (
     <main className="pt-0!">
@@ -47,7 +61,18 @@ export default async function Page({
             </div>
           }
         </section>
-        <section className="feedback-section"></section>
+        <section className="feedback-section">
+          <h2 className="text-4xl text-black! font-bold">Resume Review</h2>(
+          <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
+            <Summary feedback={feedback} />
+            <ATS
+              score={feedback.ATS.score || 0}
+              suggestions={feedback.ATS.tips || []}
+            />
+            <Details feedback={feedback} />
+          </div>
+          )
+        </section>
       </div>
     </main>
   );

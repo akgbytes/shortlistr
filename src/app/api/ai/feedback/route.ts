@@ -3,7 +3,7 @@ import { db } from "@/db";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { resumeUploads } from "@/db/schema";
-import { generateFeedback } from "@/components/ai-utils";
+import { generateFeedback } from "@/lib/ai-utils";
 import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
