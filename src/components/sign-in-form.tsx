@@ -46,7 +46,7 @@ const SignInForm = () => {
             type="button"
             disabled={isPending}
             onClick={() => handleSocialLogin("google")}
-            className="flex items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition hover:bg-neutral-50 disabled:opacity-50"
+            className="flex items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition hover:bg-neutral-50 disabled:opacity-50 cursor-pointer"
           >
             <Image src="/google.svg" alt="Google" width={16} height={16} />
             Continue with Google
@@ -56,7 +56,7 @@ const SignInForm = () => {
             type="button"
             disabled={isPending}
             onClick={() => handleSocialLogin("github")}
-            className="flex items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition hover:bg-neutral-50 disabled:opacity-50"
+            className="flex items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition hover:bg-neutral-50 disabled:opacity-50 cursor-pointer"
           >
             <Image src="/github.svg" alt="GitHub" width={16} height={16} />
             Continue with GitHub

@@ -226,3 +226,58 @@ export const AIResponseFormat = `
         }[]; //give 3-4 tips
       };
     }`;
+
+export const FEATURES = [
+  {
+    title: "Instant Feedback",
+    description: "Get comprehensive analysis in seconds, not days",
+  },
+  {
+    title: "Smart Suggestions",
+    description: "AI-powered recommendations to improve every section",
+  },
+  {
+    title: "ATS Optimization",
+    description: "Ensure your resume passes Applicant Tracking Systems",
+  },
+  {
+    title: "Industry Benchmarking",
+    description: "Compare your resume against top performers in your field",
+  },
+];
+
+export const HOW_IT_WORKS = [
+  {
+    step: "01",
+    title: "Upload",
+    description: "Upload your resume in PDF or Word format",
+  },
+  {
+    step: "02",
+    title: "Analyze",
+    description: "Our AI instantly reviews and scores your resume",
+  },
+  {
+    step: "03",
+    title: "Improve",
+    description: "Get actionable suggestions and track improvements",
+  },
+];
+
+export const TESTIMONIALS = [
+  {
+    name: "Sarah Chen",
+    role: "Software Engineer",
+    quote: "Increased my interview rate by 200%",
+  },
+  {
+    name: "Marcus Johnson",
+    role: "Product Manager",
+    quote: "Best free tool for resume optimization",
+  },
+  {
+    name: "Emily Rodriguez",
+    role: "Data Analyst",
+    quote: "Got 3 job offers after using ResumeAI",
+  },
+];
